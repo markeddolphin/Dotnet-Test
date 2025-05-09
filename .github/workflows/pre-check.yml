@@ -35,4 +35,4 @@ jobs:
 
       - name: Run static analysis with Roslynator
         run: |
-          roslynator analyze Main/Build.cs
+          roslynator analyze --files Main/Build.cs --verbosity diagnostic
