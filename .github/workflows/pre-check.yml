@@ -1,0 +1,34 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - '**/*.cs'
+
+jobs:
+  lint-and-static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+
+      - name: Install CSharpier
+        run: npm install --save-dev csharpier
+
+      - name: Run CSharpier to check formatting
+        run: npx csharpier --check '**/*.cs'
+
+      - name: Run static analysis (dotnet build)
+        run: dotnet build -warnaserror
