@@ -22,13 +22,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Use your actual version
+          dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Install CSharpier
+        run: dotnet tool install --global csharpier
 
-      - name: Run code formatter (dotnet format)
-        run: dotnet format --verify-no-changes --severity error
+      - name: Run CSharpier to check formatting
+        run: dotnet csharpier --check .
 
-      - name: Run static analysis with warnings as errors
-        run: dotnet build --no-restore -warnaserror
+      - name: Run static analysis (dotnet build)
+        run: dotnet build --warnaserror
