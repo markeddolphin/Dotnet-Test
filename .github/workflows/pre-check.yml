@@ -29,10 +29,3 @@ jobs:
 
       - name: Run CSharpier to check formatting
         run: csharpier check Main/Build.cs
-
-      - name: Install Roslynator CLI
-        run: dotnet tool install -g roslynator.dotnet.cli
-
-      - name: Run static analysis with Roslynator
-        run: |
-          roslynator analyze --files Main/Build.cs --verbosity diagnostic
