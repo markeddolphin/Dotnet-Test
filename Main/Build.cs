@@ -36,12 +36,7 @@ public abstract class FacilityCore : IFacility
     protected int TierCap = 10;
     protected int TierFloor = 1;
 
-    public virtual void Promote()
-    {
-        if (FacilityTier >= TierCap)
-            throw new Exception($"{FacilityName} reached the tier limit.");
-        FacilityTier++;
-    }
+    
 
     public virtual void Demote()
     {
