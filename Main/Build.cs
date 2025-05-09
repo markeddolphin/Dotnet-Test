@@ -1,4 +1,4 @@
-﻿public enum Division
+public enum Division
 {
     Premier,
     Division1,
