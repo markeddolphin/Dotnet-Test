@@ -36,4 +36,4 @@ jobs:
 
       - name: Run static analysis with Roslynator
         run: |
-          roslynator analyze DOTNET-TEST/Main/Main.csproj
+          roslynator analyze ./Main/Main.csproj
