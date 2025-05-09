@@ -1,0 +1,31 @@
+name: Auto Tag on Dev-to-Main Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  tag:
+    if: |
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.head.ref == 'devops_PR'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Set version and tag
+        run: |
+          VERSION=$(cat version.txt)
+          COUNT=$(git rev-list --count HEAD)
+          FULL_VERSION="${VERSION}.${COUNT}"
+          echo "Tagging version: $FULL_VERSION"
+          
+          git config user.name "markeddolphin"
+          git config user.email "lacosby.milli@gmail.com"
+          git tag -a "$FULL_VERSION" -m "Auto tag from dev->main merge"
+          git push origin "$FULL_VERSION"
