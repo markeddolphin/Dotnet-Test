@@ -4,4 +4,6 @@ public enum Division
     Division1,
     Division2,
     Division3,
+    Division4,
+    Division5,
 }
