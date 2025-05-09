@@ -31,11 +31,8 @@ jobs:
         run: csharpier check Main/Build.cs
 
       - name: Install Roslynator CLI
-        run: dotnet tool install -g roslynator.cli
+        run: dotnet tool install -g roslynator.dotnet.cli
 
       - name: Run static analysis with Roslynator
         run: |
-          roslynator analyze . \
-            --file-extension .cs \
-            --report-format text \
-            --severity-level warning || true
+          roslynator analyze-files Main/Build.cs
