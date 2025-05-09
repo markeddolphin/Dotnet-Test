@@ -1,7 +1,13 @@
-public enum Division
+namespace Main
 {
-    Premier,
-    Division1,
-    Division2,
-    Division3,
+    public enum Division
+    {
+        Premier,
+        Division1,
+        Division2,
+        Division3,
+        Division4,
+        Division5,
+        Division6,
+    }
 }
