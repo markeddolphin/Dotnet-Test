@@ -36,4 +36,4 @@ jobs:
 
       - name: Run static analysis with Roslynator
         run: |
-          roslynator analyze ./Main/Main.csproj
+          roslynator analyze $(find . -name "*.csproj" -print -quit)
