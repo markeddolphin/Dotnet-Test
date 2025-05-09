@@ -19,16 +19,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          node-version: '16'
+          dotnet-version: '8.0.x' # Adjust to your project's version
 
-      - name: Install CSharpier
-        run: npm install --save-dev csharpier
+      - name: Install CSharpier as a .NET global tool
+        run: dotnet tool install --global csharpier
+
+      - name: Add .NET global tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Run CSharpier to check formatting
-        run: npx csharpier --check '**/*.cs'
+        run: csharpier --check .
 
       - name: Run static analysis (dotnet build)
         run: dotnet build -warnaserror
