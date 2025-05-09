@@ -21,6 +21,14 @@ public class TeamInfrastructure
     }
 }
 
+public interface IFacility
+{
+    string FacilityName { get; }
+    int FacilityTier { get; }
+    void Promote();
+    void Demote();
+}
+
 
 public abstract class FacilityCore : IFacility
 {
