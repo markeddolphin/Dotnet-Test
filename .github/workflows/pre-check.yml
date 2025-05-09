@@ -22,16 +22,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Adjust to your project's version
+          dotnet-version: '8.0.x' # Use your actual version
 
-      - name: Install CSharpier as a .NET global tool
-        run: dotnet tool install --global csharpier
+      - name: Restore dependencies
+        run: dotnet restore
 
-      - name: Add .NET global tools to PATH
-        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+      - name: Run code formatter (dotnet format)
+        run: dotnet format --verify-no-changes --severity error
 
-      - name: Run CSharpier to check formatting
-        run: csharpier --check .
-
-      - name: Run static analysis (dotnet build)
-        run: dotnet build -warnaserror
+      - name: Run static analysis with warnings as errors
+        run: dotnet build --no-restore -warnaserror
