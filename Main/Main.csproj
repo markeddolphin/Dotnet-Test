@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Library</OutputType> <!-- Library if it's just enum/classes -->
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Main</RootNamespace>
   </PropertyGroup>
-
 </Project>
