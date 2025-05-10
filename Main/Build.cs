@@ -10,5 +10,6 @@ namespace Main
         Division5,
         Division6,
         Division7,
+        Division8,
     }
 }
