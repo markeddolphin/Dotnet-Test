@@ -22,5 +22,6 @@ namespace Main
         Division17,
         Division18,
         Division19,
+        Division20,
     }
 }
