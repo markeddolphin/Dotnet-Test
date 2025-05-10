@@ -26,16 +26,19 @@ jobs:
       - name: Get latest tag
         id: get_tag
         run: |
-          TAG=$(git describe --tags --abbrev=0 || echo "0.0.0")
+          TAG=$(git describe --tags --abbrev=0 || echo "0.0.0.0")
           echo "Last tag: $TAG"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Determine next version
         id: versioning
         run: |
-          LAST_TAG=${{ steps.get_tag.outputs.tag }}
-          IFS='.' read -r MAJOR MINOR PATCH <<< "${LAST_TAG:-0.0.0}"
+          TAG="${{ steps.get_tag.outputs.tag }}"
           BUILD=$(git rev-list --count HEAD)
+
+          # Extract major.minor.patch (ignore build)
+          VERSION=$(echo "$TAG" | cut -d. -f1-3)
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 
           MERGE_COMMIT_MSG=$(git log -1 --pretty=%B)
           echo "Merge commit message: $MERGE_COMMIT_MSG"
