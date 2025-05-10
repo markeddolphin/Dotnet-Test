@@ -58,7 +58,10 @@ jobs:
           FULL_VERSION="${BASE_VERSION}.${BUILD}"
           echo "New version: $FULL_VERSION"
           echo "full_version=$FULL_VERSION" >> $GITHUB_OUTPUT
-          echo "merge_message=${MERGE_COMMIT_MSG}" >> $GITHUB_OUTPUT
+          echo "merge_message<<EOF" >> $GITHUB_OUTPUT
+          echo "${MERGE_COMMIT_MSG}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Create and push tag
         run: |
           git tag -a "${{ steps.versioning.outputs.full_version }}" -m "Auto tag: ${{ steps.versioning.outputs.full_version }} from dev->main merge"
