@@ -57,17 +57,7 @@ jobs:
           BASE_VERSION="${MAJOR}.${MINOR}.${PATCH}"
           FULL_VERSION="${BASE_VERSION}.${BUILD}"
           echo "New version: $FULL_VERSION"
-
-          echo "base_version=$BASE_VERSION" >> $GITHUB_OUTPUT
           echo "full_version=$FULL_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Update version.txt
-        run: |
-          echo "${{ steps.versioning.outputs.base_version }}" > version.txt
-          git add version.txt
-          git commit -m "chore: update version.txt to ${{ steps.versioning.outputs.base_version }}"
-          git push origin main
-
       - name: Create and push tag
         run: |
           git tag -a "${{ steps.versioning.outputs.full_version }}" -m "Auto tag: ${{ steps.versioning.outputs.full_version }} from dev->main merge"
